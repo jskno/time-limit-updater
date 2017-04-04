@@ -1,0 +1,5 @@
+
+To run the app :
+java -jar time-limit-updater.jar (Altia Int)
+java -jar time-limit-updater.jar --spring.profiles.active=euipoInt (Euipo Int)
+java -jar time-limit-updater.jar --spring.profiles.active=prod (Prod)

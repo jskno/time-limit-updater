@@ -21,16 +21,9 @@ public class DBConfig {
     
     @Bean
     @Primary
-//    @ConfigurationProperties("em.euipoInt.datasource")
     @ConfigurationProperties("em.datasource")
     public DataSource emDataSource() {
         return DataSourceBuilder.create().build();
     }
 
-//    @Bean(destroyMethod="")
-//    @ConfigurationProperties()
-//    public DataSource wfwDataSource() throws Exception {
-//        JndiDataSourceLookup dataSourceLookup = new JndiDataSourceLookup();
-//        return dataSourceLookup.getDataSource("wfw.ejb.wfwservicemanager");
-//    }
 }

@@ -21,8 +21,7 @@ import java.util.Map;
 public class WorkflowManagerImpl implements WorkflowManager{
 
 	private static Logger log = Logger.getLogger(WorkflowManagerImpl.class);
-
-	/** The pe session. */
+	
 	private VWSession peSession;
 
 	@Autowired
@@ -30,10 +29,7 @@ public class WorkflowManagerImpl implements WorkflowManager{
 		log.info("------------Instantiating WorkflowManager--------------");
 		this.peSession = p8Connection.getPESession();
 	}
-
-	public void getStoredTimeLimit(String taskName) {
-
-	}
+	
 
 	public void repeatAllByName(String wfwName) {
 		try {
@@ -79,8 +75,8 @@ public class WorkflowManagerImpl implements WorkflowManager{
 			//Iterate The Found Objects
 			while (queueQuery.hasNext()) {
 				VWWorkObject obj = (VWWorkObject) queueQuery.next();
-				System.out.println(obj.getAuthoredFieldNames());
-				System.out.println(obj.getStepName());
+				log.info(obj.getAuthoredFieldNames());
+				log.info(obj.getStepName());
 			}
 			log.debug("Completed Steps = " + count);
 		} catch (VWException e) {
@@ -97,8 +93,8 @@ public class WorkflowManagerImpl implements WorkflowManager{
 			//Iterate The Found Objects
 			while (queueQuery.hasNext()) {
 				VWWorkObject obj = (VWWorkObject) queueQuery.next();
-				System.out.println(obj.getAuthoredFieldNames());
-				System.out.println(obj.getStepName());
+				log.info(obj.getAuthoredFieldNames());
+				log.info(obj.getStepName());
 ////				obj.doLock(true);
 //				obj.setSelectedResponse(FSRConstants.RESPONSE_REPEAT);
 //				obj.doDispatch();
@@ -118,8 +114,8 @@ public class WorkflowManagerImpl implements WorkflowManager{
 			//Iterate The Found Objects
 			while (queueQuery.hasNext()) {
 				VWWorkObject obj = (VWWorkObject) queueQuery.next();
-				System.out.println(obj.getStepName());
-				System.out.println(obj.getFieldNames());
+				log.info(obj.getStepName());
+				log.info(obj.getFieldNames());
 			}
 			log.debug("Completed Steps = " + count);
 		} catch (VWException e) {
@@ -134,7 +130,7 @@ public class WorkflowManagerImpl implements WorkflowManager{
 					0, "F_StepName = '" + mapping.getTaskName() + "'" ,
 					null, VWFetchType.FETCH_TYPE_WORKOBJECT);
 
-			System.out.println("WORKFLOWS RETRIEVED FOR " + mapping.getTaskName() + " " + queueQuery.fetchCount());
+			log.info("WORKFLOWS RETRIEVED FOR " + mapping.getTaskName() + " " + queueQuery.fetchCount());
 			int failed = 0;
 			int failedAndAdded = 0;
 			int success = 0;
@@ -144,13 +140,13 @@ public class WorkflowManagerImpl implements WorkflowManager{
 				WorkflowTask workflowTask = new WorkflowTask();
 				try {
 					mapToWorkflowTask(obj, workflowTask, mapping);
-					System.out.println(workflowTask);
+					log.info(workflowTask);
 				} catch (VWException e) {
 					failed++;
 					if(tasksIds.contains(workflowTask.getCurrentTaskId())) {
 						e.printStackTrace();
-						System.out.println(e);
-						writeFailedElemet(workflowTask, builder);
+						log.info(e);
+						addFailedElementToBuilder(workflowTask, builder);
 						failedAndAdded++;
 					}
 					continue;
@@ -160,30 +156,18 @@ public class WorkflowManagerImpl implements WorkflowManager{
 						success++;
 						mapFromWFW.put(workflowTask.getCurrentTaskId(), workflowTask.getTimeLimit());
 					} else {
-						writeFailedElemet(workflowTask, builder);
+						addFailedElementToBuilder(workflowTask, builder);
 					}
-					System.out.println(workflowTask);
-					System.out.println();
+					log.info(workflowTask);
 				}
 			}
-			System.out.println("CASES FAILED BECAUSE DON'T HAVE VARIABLE : " + failed);
-			System.out.println("CASES FAILED BECAUSE DON'T HAVE VARIABLE AND ADDED TO THE FILE : " + failedAndAdded);
-			System.out.println("CASES SUCCESFULLY UPDATED " + success);
+			log.info("CASES FAILED BECAUSE DON'T HAVE VARIABLE : " + failed);
+			log.info("CASES FAILED BECAUSE DON'T HAVE VARIABLE AND ADDED TO THE FILE : " + failedAndAdded);
+			log.info("CASES SUCCESFULLY UPDATED " + success);
 		} catch (VWException e) {
 			log.error(e);
 		}
 
-	}
-
-	private void addWorkflowTaskToMap(Map<String, List<PairFromWFW>> mapFromWFW, WorkflowTask workflowTask) {
-		if(mapFromWFW.get(workflowTask.getCurrentTaskId()) != null) {
-			System.out.println("ADDING ");
-			mapFromWFW.get(workflowTask.getCurrentTaskId()).add(new PairFromWFW(workflowTask.getTaskName(), workflowTask.getTimeLimit()));
-        } else {
-            List<PairFromWFW> list = new ArrayList<>();
-            list.add(new PairFromWFW(workflowTask.getTaskName(), workflowTask.getTimeLimit()));
-            mapFromWFW.put(workflowTask.getCurrentTaskId(), list);
-        }
 	}
 
 	private WorkflowTask mapToWorkflowTask(VWWorkObject obj, WorkflowTask workflowTask, TaskNameVariablesMapping mapping) throws VWException {
@@ -197,14 +181,14 @@ public class WorkflowManagerImpl implements WorkflowManager{
 		return workflowTask;
 	}
 
-	private void writeFailedElemet(WorkflowTask workflowTask, StringBuilder builder) {
+	private void addFailedElementToBuilder(WorkflowTask workflowTask, StringBuilder builder) {
 		builder.append(workflowTask);
 		builder.append(System.getProperty("line.separator"));
 	}
 
 
 //				for(String field : obj.getFieldNames()) {
-//					System.out.println(field);
+//					log.info(field);
 //				}
 
 //			VWQueueQuery queueQuery = theQueue.createQuery(null, null, null,

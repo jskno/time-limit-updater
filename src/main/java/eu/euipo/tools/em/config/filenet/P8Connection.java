@@ -9,8 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 @Component
-//@ConfigurationProperties(prefix = "filenet")
-@ConfigurationProperties(prefix = "filenet.altiaInt")
+@ConfigurationProperties(prefix = "filenet")
 public class P8Connection {
 
 	/** The log. */
