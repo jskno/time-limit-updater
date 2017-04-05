@@ -2,10 +2,8 @@ package eu.euipo.tools.em.utils;
 
 import eu.euipo.tools.em.persistence.model.CurrentTaskVO;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -36,15 +34,25 @@ public class DateUtil {
 	}
 
 	public static Date getDateFromString(String strDate) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-		LocalDate localDate = LocalDate.parse(strDate, formatter);
-		return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		Date date = null;
+		try {
+			date = formatter.parse(strDate);
+		} catch (ParseException e) {
+			throw new RuntimeException("The date format is incorrect");
+		}
+		return date;
 	}
 
 	public static Date getDateFromStringUSA(String strDate) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate localDate = LocalDate.parse(strDate, formatter);
-		return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = formatter.parse(strDate);
+		} catch (ParseException e) {
+			throw new RuntimeException("The date format is incorrect");
+		}
+		return date;
 	}
 
 	public static String getCurrentYear(Date date) {

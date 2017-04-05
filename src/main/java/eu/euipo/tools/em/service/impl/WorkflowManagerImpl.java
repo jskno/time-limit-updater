@@ -1,11 +1,8 @@
 package eu.euipo.tools.em.service.impl;
 
-import com.sun.net.httpserver.Authenticator;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import eu.euipo.tools.em.config.filenet.P8Connection;
 import eu.euipo.tools.em.constants.FSRConstants;
 import eu.euipo.tools.em.constants.TaskNameVariablesMapping;
-import eu.euipo.tools.em.persistence.model.PairFromWFW;
 import eu.euipo.tools.em.persistence.model.WorkflowTask;
 import eu.euipo.tools.em.service.WorkflowManager;
 import filenet.vw.api.*;
@@ -13,7 +10,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
