@@ -48,28 +48,20 @@ public class DateUtil {
 	}
 
 	public static String getCurrentYear(Date date) {
-		// create a calendar
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		// get the value of all the calendar date fields.
 		return String.valueOf(cal.get(Calendar.YEAR));
-
-
 	}
 
 	public static String getCurrentMonth(Date date) {
-		// create a calendar
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		// get the value of all the calendar date fields.
-		return String.valueOf(cal.get(Calendar.MONTH));
+		return String.valueOf(cal.get(Calendar.MONTH) + 1);
 	}
 
 	public static String getCurrentDay(Date date) {
-		// create a calendar
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		// get the value of all the calendar date fields.
 		return String.valueOf(cal.get(Calendar.DATE));
 	}
 }

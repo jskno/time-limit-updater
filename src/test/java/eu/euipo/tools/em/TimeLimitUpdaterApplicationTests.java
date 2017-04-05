@@ -11,24 +11,26 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class TimeLimitUpdaterApplicationTests {
 
 	@Autowired
 	private CurrentTaskService currentTaskService;
 
-	@Test
+//	@Test
 	public void contextLoads() {
 	}
 
-	@Test
+//	@Test
 	public void getTasksByEntityTest() {
 
 		List<CurrentTask> tasks = currentTaskService.getTasksByEntity("002589755", TimeLimitUpdaterConstants.OPPO_ENTITY,
 				TimeLimitUpdaterConstants.TASK_NAMES);
 
-		tasks.stream().forEach(task -> System.out.println(task));
+		for(CurrentTask task : tasks) {
+			System.out.println(task);
+		}
 	}
 
 }

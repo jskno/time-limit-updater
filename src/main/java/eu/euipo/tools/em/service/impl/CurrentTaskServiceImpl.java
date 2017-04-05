@@ -12,11 +12,11 @@ import java.util.List;
 /**
  * Created by canogjo on 31/03/2017.
  */
-@Service()
+@Service
 public class CurrentTaskServiceImpl implements CurrentTaskService {
 
     @Autowired
-    private CurrentTaskRepository currentTaskRepository;
+    CurrentTaskRepository currentTaskRepository;
 
     @Override
     public List<CurrentTask> getTasksByEntity(String identity, Integer tyentity, List<String> tasksNames) {

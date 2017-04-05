@@ -50,16 +50,19 @@ public class Application {
         tasksFromDB = getTasksFromDB(args);
         List<String> tasksIds = extractListFromTasks(tasksFromDB);
 
-        // Gets the workflow related with the tasks from DB
-        Map<String, String> mapFromWFW = new HashMap<>();
-        getFromWorkflowTaskIdTimeLimit(tasksIds, mapFromWFW);
-        scriptWriter.writeFailScript(getFailedCases());
+        Map<String, String> mapFromWFW = null;
+        if(!tasksIds.isEmpty()) {
+            // Gets the workflow related with the tasks from DB
+            mapFromWFW = new HashMap<>();
+            getFromWorkflowTaskIdTimeLimit(tasksIds, mapFromWFW);
+            scriptWriter.writeFailScript(getFailedCases());
+        }
 
-        List<CurrentTaskVO> updatedTasks = mapUpdatedTasksToVO(mapFromWFW);
-        // Write the script
-        scriptWriter.writeUpdateScript(updatedTasks);
-
-
+        if(mapFromWFW != null && !mapFromWFW.isEmpty()) {
+            List<CurrentTaskVO> updatedTasks = mapUpdatedTasksToVO(mapFromWFW);
+            // Write the script
+            scriptWriter.writeUpdateScript(updatedTasks);
+        }
     }
 
     private void validateUserInputs(String[] args) {
@@ -85,15 +88,15 @@ public class Application {
         } else  {
             tasks = currentTaskService.get100TasksByDates(getStarDate(), getEndDate());
         }
-        log.info("Number of records from database: " + tasksFromDB.size());
+        log.info("Number of records from database: " + tasks.size());
         return tasks;
     }
 
     private List<String> extractListFromTasks(List<CurrentTask> tasksByDates) {
         List<String> tasksIds = new ArrayList<>();
-        tasksByDates.stream().forEach(currentTaskEntity ->
-                tasksIds.add(String.valueOf(currentTaskEntity.getIdcurrenttask()))
-        );
+        for(CurrentTask task : tasksByDates) {
+            tasksIds.add(String.valueOf(task.getIdcurrenttask()));
+        }
         log.info("TASK IDS : " + tasksIds);
         return tasksIds;
     }

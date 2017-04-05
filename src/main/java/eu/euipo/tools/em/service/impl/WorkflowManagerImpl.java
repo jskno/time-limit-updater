@@ -140,7 +140,6 @@ public class WorkflowManagerImpl implements WorkflowManager{
 				WorkflowTask workflowTask = new WorkflowTask();
 				try {
 					mapToWorkflowTask(obj, workflowTask, mapping);
-					log.info(workflowTask);
 				} catch (VWException e) {
 					failed++;
 					if(tasksIds.contains(workflowTask.getCurrentTaskId())) {
