@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ByDatesAndTaskName" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="eu.euipo.tools.em.app.TimeLimitUpdaterApp" />
+    <option name="PROGRAM_PARAMETERS" value="--spring.profiles.active=euipoInt 28-03-2005 05-04-2015 T_OPPO_DLN_COP_PERIOD" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <module name="time-limit-updater" />
+    <envs />
+    <method />
+  </configuration>
+</component>
