@@ -14,6 +14,10 @@ public interface CurrentTaskService {
 
     List<CurrentTask> getTasksByDates(Integer tyentity, List<String> tasksNames, Date startDate, Date endDate);
 
-    List<CurrentTask> get100TasksByDates(Date startDate, Date endDate);
+    List<CurrentTask> getLimitedTasksByDates(int numOfRows, Date startDate, Date endDate);
+
+    List<CurrentTask> getLimitedTasksByDatesAndTaskName(int numOfRows, int idtask, Date startDate, Date endDate);
+
+    List<CurrentTask> getTasksByDatesAndTaskName(Integer tyentity, String tasksName, Date startDate, Date endDate);
 
 }

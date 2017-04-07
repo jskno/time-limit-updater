@@ -29,8 +29,18 @@ public class CurrentTaskServiceImpl implements CurrentTaskService {
     }
 
     @Override
-    public List<CurrentTask> get100TasksByDates(Date startDate, Date endDate) {
-        return currentTaskRepository.get100TasksByDates(startDate, endDate);
+    public List<CurrentTask> getLimitedTasksByDates(int numOfRows, Date startDate, Date endDate) {
+        return currentTaskRepository.getLimitedTasksByDates(numOfRows, startDate, endDate);
+    }
+
+    @Override
+    public List<CurrentTask> getLimitedTasksByDatesAndTaskName(int numOfRows, int idtask, Date startDate, Date endDate) {
+        return currentTaskRepository.getLimitedTasksByDatesAndTaskName(numOfRows, idtask, startDate, endDate);
+    }
+
+    @Override
+    public List<CurrentTask> getTasksByDatesAndTaskName(Integer tyentity, String taskName, Date startDate, Date endDate) {
+        return currentTaskRepository.getTasksByDatesAndTaskName(tyentity, taskName, startDate, endDate);
     }
 
 }

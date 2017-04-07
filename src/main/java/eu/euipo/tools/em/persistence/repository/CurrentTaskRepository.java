@@ -25,13 +25,29 @@ public interface CurrentTaskRepository extends JpaRepository<CurrentTask, String
     List<CurrentTask> getTasksByDates(
             @Param("tyentity") Integer tyentity,
             @Param("tasksNames") List<String> nmtask,
-            @Param("startdate")Date startdate,
+            @Param("startdate") Date startdate,
             @Param("enddate") Date enddate);
 
-    @Query(value = "SELECT FIRST 100 * FROM dcurrenttask d WHERE d.tyentity = 3 AND d.taskType.nmtask IN ('T_OPPO_DLN_COP_PERIOD', 'T_OPPO_WFR_INEX_AO', 'T_OPPO_WFR_INEX_FFEA') AND d.dtinsert BETWEEN ?1 AND ?2",
+    @Query(value = "SELECT FIRST ?1 * FROM dcurrenttask d WHERE d.tyentity = 3 AND d.idtask IN (26,30,48,51,83,86,98,139,147,155,194,198,275) AND d.dtinsert BETWEEN ?2 AND ?3",
             nativeQuery = true)
-    List<CurrentTask> get100TasksByDates(
-            @Param("startdate")Date startdate,
+    List<CurrentTask> getLimitedTasksByDates(
+            @Param("numOfRows") int numOfRows,
+            @Param("startdate") Date startdate,
+            @Param("enddate") Date enddate);
+
+    @Query(value = "SELECT FIRST ?1 * FROM dcurrenttask d WHERE d.tyentity = 3 AND d.idtask = ?2 AND d.dtinsert BETWEEN ?3 AND ?4",
+            nativeQuery = true)
+    List<CurrentTask> getLimitedTasksByDatesAndTaskName(
+            @Param("numOfRows") int numOfRows,
+            @Param("idtask") int idtask,
+            @Param("startdate") Date startdate,
+            @Param("enddate") Date enddate);
+
+    @Query("SELECT d FROM CurrentTask d WHERE d.tyentity = :tyentity AND d.taskType.nmtask = :taskName AND d.dtinsert BETWEEN :startdate AND :enddate")
+    List<CurrentTask> getTasksByDatesAndTaskName(
+            @Param("tyentity") Integer tyentity,
+            @Param("taskName") String nmtask,
+            @Param("startdate") Date startdate,
             @Param("enddate") Date enddate);
 
 }

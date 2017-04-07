@@ -1,6 +1,7 @@
 package eu.euipo.tools.em.service;
 
 import eu.euipo.tools.em.persistence.model.CurrentTaskVO;
+import eu.euipo.tools.em.persistence.model.WorkflowTask;
 
 import java.util.List;
 
@@ -9,7 +10,13 @@ import java.util.List;
  */
 public interface ScriptWriter {
 
-    void writeUpdateScript(List<CurrentTaskVO> tasks);
+    void writeUpdatedScript(List<CurrentTaskVO> tasks);
 
-    void writeFailScript(StringBuilder failedCases);
+    void writeNotUpdatedScript(List<CurrentTaskVO> tasks);
+
+    void writeScript(StringBuilder builder, String filename);
+
+    void writeDossierNotFound(List<String> dossiersNotFound);
+
+    void writeFieldNotFound(List<WorkflowTask> matchingFailedTasks);
 }

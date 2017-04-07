@@ -1,5 +1,7 @@
 package eu.euipo.tools.em.persistence.entity;
 
+import org.springframework.util.StringUtils;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -98,7 +100,7 @@ public class CurrentTask {
     }
 
     public String getIdappli() {
-        return idappli;
+        return StringUtils.trimAllWhitespace(idappli);
     }
 
     public String getWfidprocess() {
@@ -154,7 +156,7 @@ public class CurrentTask {
     }
 
     public String getIdentity() {
-        return identity;
+        return StringUtils.trimAllWhitespace(identity);
     }
 
     public String getDsccurrenttask() {
@@ -195,17 +197,18 @@ public class CurrentTask {
 
     @Override
     public String toString() {
-        return "CurrentTaskEntity{" +
-                "idcurrenttask=" + idcurrenttask +
-                ", idappli='" + idappli + '\'' +
+        return "CurrentTask{" +
+                "idcurrenttask=" + getIdcurrenttask() +
+                ", idappli='" + getIdappli() + '\'' +
+                ", wfidprocess='" + getWfidprocess() + '\'' +
                 ", dtinsert=" + dtinsert +
                 ", dtstarttask=" + dtstarttask +
                 ", dtendtask=" + dtendtask +
                 ", stcurrenttask=" + stcurrenttask +
                 ", tyentity=" + tyentity +
-                ", identity='" + identity + '\'' +
+                ", identity='" + getIdentity() + '\'' +
                 ", dsccurrenttask='" + dsccurrenttask + '\'' +
-                ", taskType=" + taskType +
+                ", taskType=" + getTaskType() +
                 ", dtstarttimelimit=" + dtstarttimelimit +
                 ", dtendtimelimit=" + dtendtimelimit +
                 '}';

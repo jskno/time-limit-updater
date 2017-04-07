@@ -1,6 +1,7 @@
 package eu.euipo.tools.em.persistence.entity;
 
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,11 +44,11 @@ public class TaskType {
     }
 
     public String getNmtask() {
-        return nmtask;
+        return StringUtils.trimAllWhitespace(nmtask);
     }
 
     public void setNmtask(String nmtask) {
-        this.nmtask = nmtask;
+        this.nmtask = StringUtils.trimAllWhitespace(nmtask);
     }
 
     public String getDsctask() {
@@ -86,7 +87,7 @@ public class TaskType {
     public String toString() {
         return "TaskType{" +
                 "idtask=" + idtask +
-                ", nmtask='" + nmtask + '\'' +
+                ", nmtask='" + getNmtask() + '\'' +
                 '}';
     }
 }

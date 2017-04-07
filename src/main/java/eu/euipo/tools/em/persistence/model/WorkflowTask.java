@@ -8,7 +8,8 @@ public class WorkflowTask {
     private String workflowName;
     private String taskName;
     private String workflowNumber;
-    private String currentTaskId;
+    private String dossierId;
+    private Integer currentTaskId;
     private String timeLimit;
 
     public String getWorkflowName() {
@@ -35,11 +36,19 @@ public class WorkflowTask {
         this.workflowNumber = workflowNumber;
     }
 
-    public String getCurrentTaskId() {
+    public String getDossierId() {
+        return dossierId;
+    }
+
+    public void setDossierId(String dossierId) {
+        this.dossierId = dossierId;
+    }
+
+    public Integer getCurrentTaskId() {
         return currentTaskId;
     }
 
-    public void setCurrentTaskId(String currentTaskId) {
+    public void setCurrentTaskId(Integer currentTaskId) {
         this.currentTaskId = currentTaskId;
     }
 
@@ -56,7 +65,7 @@ public class WorkflowTask {
         return "WorkflowTask{" +
                 "workflowName='" + workflowName + '\'' +
                 ", taskName='" + taskName + '\'' +
-                ", workflowNumber='" + workflowNumber + '\'' +
+                ", dossierId='" + dossierId + '\'' +
                 ", currentTaskId='" + currentTaskId + '\'' +
                 ", timeLimit='" + timeLimit + '\'' +
                 '}';

@@ -1,5 +1,6 @@
 package eu.euipo.tools.em;
 
+import eu.euipo.tools.em.constants.TaskNameVariablesMapping;
 import eu.euipo.tools.em.constants.TimeLimitUpdaterConstants;
 import eu.euipo.tools.em.persistence.entity.CurrentTask;
 import eu.euipo.tools.em.service.CurrentTaskService;
@@ -26,7 +27,7 @@ public class TimeLimitUpdaterApplicationTests {
 	public void getTasksByEntityTest() {
 
 		List<CurrentTask> tasks = currentTaskService.getTasksByEntity("002589755", TimeLimitUpdaterConstants.OPPO_ENTITY,
-				TimeLimitUpdaterConstants.TASK_NAMES);
+				TaskNameVariablesMapping.getNames());
 
 		for(CurrentTask task : tasks) {
 			System.out.println(task);

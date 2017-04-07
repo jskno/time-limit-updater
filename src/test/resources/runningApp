@@ -1,10 +1,21 @@
 
 To run the app :
-java -jar time-limit-updater-0.0.1-SNAPSHOT.jar --spring.profiles.active=default 28-03-2017 05-04-2017     (Altia Int)
-java -jar time-limit-updater-0.0.1-SNAPSHOT.jar --spring.profiles.active=euipoInt 28-03-2017 05-04-2017    (Euipo Int)
-java -jar time-limit-updater-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod 28-03-2017 05-04-2017        (Prod)
+
+EUIPO INT
+java -jar time-limit-updater-0.0.1-SNAPSHOT.jar --spring.profiles.active=euipoInt 002116260
+java -jar time-limit-updater-0.0.1-SNAPSHOT.jar --spring.profiles.active=euipoInt 28-03-2015 05-04-2015 all
+java -jar time-limit-updater-0.0.1-SNAPSHOT.jar --spring.profiles.active=euipoInt 28-03-2015 05-04-2015 T_OPPO_DLN_COP_PERIOD
+java -jar time-limit-updater-0.0.1-SNAPSHOT.jar --spring.profiles.active=euipoInt 28-03-2015 05-04-2015 all 50
+java -jar time-limit-updater-0.0.1-SNAPSHOT.jar --spring.profiles.active=euipoInt 28-03-2015 05-04-2015 T_OPPO_DLN_COP_PERIOD 50
+
+ALTIA INT
+java -jar time-limit-updater-0.0.1-SNAPSHOT.jar --spring.profiles.active=default 002116260
+java -jar time-limit-updater-0.0.1-SNAPSHOT.jar --spring.profiles.active=default 28-03-2017 05-04-2017 all
+
+PROD
+java -jar time-limit-updater-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod 002116260
+java -jar time-limit-updater-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod 28-03-2017 05-04-2017 all
 
 
-java -jar time-limit-updater-0.0.1-SNAPSHOT.jar --spring.profiles.active=default 002116260                 (Altia Int)
-java -jar time-limit-updater-0.0.1-SNAPSHOT.jar --spring.profiles.active=euipoInt 002116260                (Euipo Int)
-java -jar time-limit-updater-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod 002116260                    (Prod)
+
+
